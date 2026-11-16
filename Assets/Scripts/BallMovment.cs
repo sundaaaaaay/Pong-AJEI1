@@ -2,27 +2,57 @@ using UnityEngine;
 
 public class BallMovment : MonoBehaviour
 {
-    [SerializeField] private float ballSpeed = 5;
+    public float speed;
     Vector3 dir;
 
-
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Vector3 dir = new Vector3(
-            Random.Range(-1f, 1f), 
-            Random.Range(-1f, 1f)
-        );
+        Spawn();
     }
 
+    // Update is called once per frame
     void Update()
     {
-        Debug.Log(Random.Range(-1f, 1f));
-        //Vector3 dir = new Vector3(1, 1);
-        transform.position = transform.position + dir * ballSpeed * Time.deltaTime;
+        transform.position = transform.position + dir * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("HE ATRAVESADO ALGO");
+        Debug.Log("He Atravesado:" + collision.gameObject.tag);
+
+        if (collision.gameObject.tag == "Horizontal")
+        {
+            dir.y = dir.y * -1;
+        }
+        if (collision.gameObject.tag == "Vertical")
+        {
+            dir.x = dir.x * -1;
+        }
+        if(collision.gameObject.tag == "Goal")
+        {
+            transform.position = new Vector3(0, 0);
+            Spawn();
+        }
+    }
+
+    void Spawn()
+    {
+        Debug.Log("Ha spawneado la Pelota");
+            
+        dir = new Vector3(
+            Random.Range(-1f, 1f),
+            Random.Range(-1f, 1f)
+            );
+
+        if (dir.x > 0)
+        {
+            dir.x = 1;
+        }
+        else
+        {
+            dir.x = -1;
+        }
+        dir.Normalize();
     }
 }

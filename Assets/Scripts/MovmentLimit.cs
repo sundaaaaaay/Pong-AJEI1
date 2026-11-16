@@ -2,30 +2,22 @@ using UnityEngine;
 
 public class MovmentLimit : MonoBehaviour
 {
-    [SerializeField] float limiteMax = 4;
-    [SerializeField] float limiteMin = -4;
-
-
-    void Start()
-    {
-        
-    }
+    public float limiteMax = 4;
+    public float limiteMin = -4;
 
     void Update()
     {
-        if(transform.position.y > limiteMax)
+        if (transform.position.y > limiteMax) //El objeto se pasa por encima del limite maximo?
         {
-           Vector3 newpos = transform.position;
-            newpos.y = limiteMax;
-            transform.position = newpos;    
+            Vector3 newpos = transform.position; //Guardo la posicion actual en una variable
+            newpos.y = limiteMax; //modifico la y de la posicion guardada
+            transform.position = newpos; //aplico la posicion guardada a la posicion del objeto
         }
-        if (transform.position.y < limiteMin)
+        if (transform.position.y < limiteMin) //El objeto se pasa por encima del limite maximo?
         {
-            Vector3 newpos = transform.position;
-            newpos.y = limiteMin;
-            transform.position = newpos;
+            Vector3 newpos = transform.position; //Guardo la posicion actual en una variable
+            newpos.y = limiteMin; //modifico la y de la posicion guardada
+            transform.position = newpos; //aplico la posicion guardada a la posicion del objeto
         }
-
-
     }
 }
